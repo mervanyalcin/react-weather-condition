@@ -31,3 +31,31 @@ export function weatherSituation(weatherSituation) {
       return "bulutlu";
   }
 }
+
+export function dayFounder(day) {
+  switch (day) {
+    case "Pazartesi":
+      return "pazartesi";
+    case "Salı":
+      return "sali";
+    case "Çarşamba":
+      return "carsamba";
+    case "Perşembe":
+      return "persembe";
+    case "Cuma":
+      return "cuma";
+    case "Cumartesi":
+      return "cumartesi";
+    case "Pazar":
+      return "pazar";
+  }
+}
+
+export function dateFounder(tarih) {
+  var tarihVeGun = tarih.split(" ");
+  var day = tarihVeGun[0];
+  var month = tarihVeGun[1];
+  var week = tarihVeGun[2];
+
+  return {day, month, week}
+}
