@@ -10,7 +10,7 @@ import AirIcon from "@mui/icons-material/Air";
 import WindPowerIcon from "@mui/icons-material/WindPower";
 import ThunderstormIcon from "@mui/icons-material/Thunderstorm";
 import { DeviceThermostatSharp } from "@mui/icons-material";
-import { Translation, useTranslation } from "react-i18next";
+import { useTranslation } from "react-i18next";
 
 export default function Home() {
   const allcities = useSelector((state) => state.allcity.allcities);
@@ -59,7 +59,6 @@ export default function Home() {
     getDailyDatas(dateValue);
   }, [dateValue]);
 
-  const [isChecked, setIsChecked] = useState(false);
   return (
     <div>
       {/* Header Search Area */}
