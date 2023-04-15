@@ -56,6 +56,5 @@ export function dateFounder(tarih) {
   var day = tarihVeGun[0];
   var month = tarihVeGun[1];
   var week = tarihVeGun[2];
-
   return {day, month, week}
 }
