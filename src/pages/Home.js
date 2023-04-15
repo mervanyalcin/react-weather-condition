@@ -1,11 +1,10 @@
 // @ts-nocheck
 import React from "react";
-import { useEffect, useState } from "react"; // React 'ı kurduğumuzda varsayılan olarak geliyor.
-import { useSelector } from "react-redux"; // store içindeki allcities değişkeninin içinde ki verilere erişmek için çağırdık
-import { getDailyDatas } from "../firebase"; // Firebase dosyamızın içinde ki getDailyDatas() fonksiyona ve lazım olsaydı diğer fonksiyonklara erişmek için kullandık
-import { dateFounder, dayFounder, weatherSituation } from "../utils"; // Bazı ihtiyacımız olan fonksiyonları yazdık ve buradan çağırarak kullandık
+import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
+import { getDailyDatas } from "../firebase";
+import { dateFounder, dayFounder, weatherSituation } from "../utils";
 
-// Projede kullandığımız bazı iconlar
 import AirIcon from "@mui/icons-material/Air";
 import WindPowerIcon from "@mui/icons-material/WindPower";
 import ThunderstormIcon from "@mui/icons-material/Thunderstorm";
@@ -14,7 +13,6 @@ import { useTranslation } from "react-i18next";
 
 export default function Home() {
   const allcities = useSelector((state) => state.allcity.allcities);
-  // Tarih objesi oluştyurduk.
   let date = new Date();
   let day = date.getUTCDate();
   let month = date.getMonth() + 1;
@@ -24,12 +22,9 @@ export default function Home() {
   const todayDate = year + "-" + month + "-" + day;
   const { t, i18n } = useTranslation();
 
-  // useState() ise bize hızle değişken ve bu değişkeni set edebileceğimiz yani değerini değiştirebileceğimiz bir fonksiyon oluşturuyor.
   const [searchText, setSearchText] = useState("");
-  // o günün tarihini tutuyoruz
   const [dateValue, setDateValue] = useState(todayDate);
 
-  // Arama inputuna yazı yazıldığı zama nburada ki fonksiyon çalışıyor.
   const cityFilter = allcities.filter((item) =>
     item.city.toLowerCase().startsWith(searchText.toLowerCase())
   );
@@ -54,16 +49,13 @@ export default function Home() {
     );
   });
 
-  // useEffect() site ilk açıldığında çalışacak yerdir. Neden biz burayı çalıştırdık çünkü firebase 'den günlük verileri yani bütün şehirlerin verilerini çektik
   useEffect(() => {
     getDailyDatas(dateValue);
   }, [dateValue]);
 
   return (
     <div>
-      {/* Header Search Area */}
       <div className="flex grow my-5">
-        {/* Burada ki input arama alanıdır. Her tuşa basıldığında  */}
         <input
           type="search"
           value={searchText}
@@ -74,8 +66,6 @@ export default function Home() {
             setSearchText(e.target.value);
           }}
         />
-        {/* Tarih alanımız. Ellerimizle değiştirebildiğimiz tarih inputunun yeri */}
-
         <input
           type="date"
           className="date-filter"
@@ -128,10 +118,24 @@ export default function Home() {
                     </h2>
                     <div className="flex rounded-xl border py-8 min-w-xl w-auto bg-white items-center self-center gap-x-20 px-10 mt-4 ">
                       <p className="font-bold">
-                        {dateFounder(currentCities.date).day}{' '}
-                        {t(dateFounder(currentCities.date).month.toLowerCase().replaceAll('ş', 's').replaceAll('ı','i').replaceAll('ğ', 'g').replaceAll('ü','u'))}{' '}
-                        {t((dateFounder(currentCities.date).week).toLowerCase().replaceAll('ş', 's').replaceAll('ı','i').replaceAll('ğ', 'g').replaceAll('ü','u').replaceAll('ç','c'))}{' '}
-
+                        {dateFounder(currentCities.date).day}{" "}
+                        {t(
+                          dateFounder(currentCities.date)
+                            .month.toLowerCase()
+                            .replaceAll("ş", "s")
+                            .replaceAll("ı", "i")
+                            .replaceAll("ğ", "g")
+                            .replaceAll("ü", "u")
+                        )}{" "}
+                        {t(
+                          dateFounder(currentCities.date)
+                            .week.toLowerCase()
+                            .replaceAll("ş", "s")
+                            .replaceAll("ı", "i")
+                            .replaceAll("ğ", "g")
+                            .replaceAll("ü", "u")
+                            .replaceAll("ç", "c")
+                        )}{" "}
                       </p>
                       <p className="">
                         {t(
