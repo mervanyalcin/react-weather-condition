@@ -16,3 +16,4 @@ const allcity = createSlice({
 
 export const { setAllCities } = allcity.actions;
 export default allcity.reducer;
+
